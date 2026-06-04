@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 8 – House Systems Glossary</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f7f8fa; --white:#ffffff;
+  --blue:#1565c0; --blue-l:#e3f2fd; --blue-d:#0d47a1;
+  --orange:#e65100; --orange-l:#fff3e0;
+  --green:#2e7d32; --green-l:#e8f5e9;
+  --teal:#00695c; --teal-l:#e0f2f1;
+  --red:#b71c1c; --red-l:#fdecea;
+  --gray:#546e7a; --gray-l:#eceff1;
+  --text:#1a1a2e; --muted:#78909c; --border:#e0e4ea;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,#0d47a1 0%,#1565c0 50%,#1976d2 100%);
+  padding:36px 32px 28px; color:#fff; position:relative; overflow:hidden;
+}
+.header::after{content:'';position:absolute;right:-60px;top:-60px;
+  width:300px;height:300px;border-radius:50%;
+  background:rgba(255,255,255,.04);pointer-events:none;}
+.header-inner{max-width:1000px;margin:0 auto;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:8px;}
+.header h1{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,38px);
+  font-weight:700;margin-bottom:6px;line-height:1.1;}
+.header p{font-size:14px;opacity:.8;margin-bottom:20px;}
+
+/* SEARCH + FILTER */
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:4px;}
+.search-wrap{position:relative;flex:1;min-width:200px;max-width:340px;}
+.search-wrap input{
+  width:100%;padding:9px 14px 9px 38px;border-radius:10px;border:none;
+  font-family:'Inter',sans-serif;font-size:13px;background:rgba(255,255,255,.15);
+  color:#fff;outline:none;
+}
+.search-wrap input::placeholder{color:rgba(255,255,255,.5);}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);
+  font-size:14px;pointer-events:none;}
+.filter-btns{display:flex;gap:6px;flex-wrap:wrap;}
+.fbtn{
+  padding:7px 14px;border-radius:20px;border:1.5px solid rgba(255,255,255,.3);
+  font-family:'Inter',sans-serif;font-size:12px;font-weight:600;
+  cursor:pointer;background:transparent;color:rgba(255,255,255,.8);
+  transition:all .2s;
+}
+.fbtn:hover,.fbtn.active{background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.6);}
+.stat-bar{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;}
+.stat{font-size:12px;color:rgba(255,255,255,.65);}
+.stat strong{color:#fff;}
+
+/* MAIN */
+.container{max-width:1000px;margin:0 auto;padding:24px 20px 48px;}
+
+/* SECTION */
+.section{margin-bottom:28px;}
+.sec-head{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 18px;border-radius:12px 12px 0 0;
+  cursor:pointer;user-select:none;
+}
+.sec-head h2{font-size:14px;font-weight:700;flex:1;letter-spacing:.3px;}
+.sec-head .count{
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+  padding:2px 9px;border-radius:10px;background:rgba(255,255,255,.25);
+}
+.sec-head .toggle{font-size:16px;transition:transform .2s;}
+.sec-head.collapsed .toggle{transform:rotate(-90deg);}
+
+/* TABLE */
+.tbl-wrap{border-radius:0 0 12px 12px;overflow:hidden;border:1px solid var(--border);border-top:none;}
+.tbl{width:100%;border-collapse:collapse;}
+.tbl thead tr th{
+  padding:9px 14px;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.8px;
+  background:var(--gray-l);color:var(--gray);border-bottom:1.5px solid var(--border);
+}
+.tbl thead tr th:first-child{width:22%;}
+.tbl thead tr th:nth-child(2){width:22%;}
+.tbl thead tr th:nth-child(3){width:56%;}
+.tbl tbody tr{transition:background .12s;}
+.tbl tbody tr:hover td{background:#f0f4ff;}
+.tbl tbody tr.hidden-row{display:none;}
+.tbl td{
+  padding:10px 14px;font-size:13px;
+  border-bottom:1px solid var(--border);vertical-align:top;
+}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl .en{font-weight:600;color:var(--blue);}
+.tbl .vi{color:var(--gray);font-style:italic;font-size:12px;}
+.tbl .def{color:#37474f;font-size:12.5px;line-height:1.5;}
+.tbl .row-num{
+  width:28px;height:28px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
+  color:#fff;flex-shrink:0;margin-right:8px;vertical-align:middle;
+}
+
+/* HIGHLIGHT */
+mark{background:#fff59d;border-radius:2px;padding:0 1px;}
+
+/* NO RESULTS */
+.no-results{text-align:center;padding:40px;color:var(--muted);display:none;}
+.no-results.show{display:block;}
+
+/* PRINT */
+@media print{
+  .header,.controls,.fbtn,.search-wrap,.toggle{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .tbl tbody tr.hidden-row{display:table-row !important;}
+  .sec-head{cursor:default;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="eyebrow">Flash for Construction · Unit 8</div>
+    <h1>House Systems – Bilingual Glossary</h1>
+    <p>Plumbing · Electrical · Heating · Solar · Ventilation · Passive Solar</p>
+    <div class="controls">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search terms..." oninput="filterAll()">
+      </div>
+      <div class="filter-btns">
+        <button class="fbtn active" onclick="filterSection('all',this)">All</button>
+        <button class="fbtn" onclick="filterSection('s1',this)">🔧 Plumbing</button>
+        <button class="fbtn" onclick="filterSection('s2',this)">⚡ Electrical</button>
+        <button class="fbtn" onclick="filterSection('s3',this)">🔥 Heating</button>
+        <button class="fbtn" onclick="filterSection('s4',this)">☀️ Solar</button>
+        <button class="fbtn" onclick="filterSection('s5',this)">💨 Ventilation</button>
+        <button class="fbtn" onclick="filterSection('s6',this)">🌿 Passive</button>
+      </div>
+    </div>
+    <div class="stat-bar">
+      <div class="stat">Total: <strong id="totalCount">0</strong> terms</div>
+      <div class="stat">Showing: <strong id="showCount">0</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div id="noResults" class="no-results">No terms found. Try a different search.</div>
+
+  <!-- SECTION 1: PLUMBING -->
+  <div class="section" id="sec-s1">
+    <div class="sec-head" style="background:var(--blue);color:#fff;" onclick="toggleSection('s1',this)">
+      <span style="font-size:18px;">🔧</span>
+      <h2>Plumbing Systems / Hệ thống cấp thoát nước</h2>
+      <span class="count">20</span>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="tbl-wrap" id="body-s1">
+      <table class="tbl">
+        <thead><tr><th>English Term</th><th>Tiếng Việt</th><th>Definition / Explanation</th></tr></thead>
+        <tbody id="rows-s1">
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">1</span><span class="en">plumbing system</span></td><td class="vi">hệ thống cấp thoát nước</td><td class="def">System of pipes and fixtures for water distribution and waste removal in a building.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">2</span><span class="en">pipe</span></td><td class="vi">đường ống</td><td class="def">Tube that carries water through a building's plumbing system.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">3</span><span class="en">fixture</span></td><td class="vi">thiết bị lắp đặt</td><td class="def">Installed item such as a tap, sink, or toilet connected to the plumbing system.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">4</span><span class="en">tap water</span></td><td class="vi">nước máy</td><td class="def">Water supplied through pipes from the mains for domestic use.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">5</span><span class="en">waterborne waste</span></td><td class="vi">chất thải theo dòng nước</td><td class="def">Waste material carried away from a building by water through drainage pipes.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">6</span><span class="en">plumbing installation</span></td><td class="vi">lắp đặt hệ thống cấp thoát nước</td><td class="def">The process of fitting pipes, fixtures and connections in a building.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">7</span><span class="en">high-pressure pump</span></td><td class="vi">máy bơm áp suất cao</td><td class="def">Device that moves water through pipes under high pressure in modern water supply systems.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">8</span><span class="en">non-toxic material</span></td><td class="vi">vật liệu không độc hại</td><td class="def">Safe material used in modern water pipes, e.g. copper, brass, steel, cast iron, plastic.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">9</span><span class="en">copper</span></td><td class="vi">đồng</td><td class="def">Reddish, non-toxic metal widely used in modern water supply pipes.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">10</span><span class="en">brass</span></td><td class="vi">đồng thau</td><td class="def">Copper-zinc alloy commonly used in plumbing fittings and valves.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">11</span><span class="en">steel</span></td><td class="vi">thép</td><td class="def">Strong, non-toxic metal used in modern water supply pipes.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">12</span><span class="en">cast iron</span></td><td class="vi">gang</td><td class="def">Heavy iron alloy used in older pipe systems for drainage.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">13</span><span class="en">domestic hot water supply</span></td><td class="vi">cấp nước nóng sinh hoạt</td><td class="def">Hot water provided to a building for daily domestic use via heater appliances or district heating.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">14</span><span class="en">water heater</span></td><td class="vi">máy nước nóng</td><td class="def">Appliance that heats water for domestic use in a building.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">15</span><span class="en">district heating</span></td><td class="vi">hệ thống sưởi tập trung</td><td class="def">Centralised heating system that supplies multiple buildings from one heat source.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">16</span><span class="en">drainage system</span></td><td class="vi">hệ thống thoát nước</td><td class="def">Network of pipes that removes used water and waste from a building.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">17</span><span class="en">waste system</span></td><td class="vi">hệ thống thoát thải</td><td class="def">System that removes solid and liquid waste from a building's plumbing.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">18</span><span class="en">vent system</span></td><td class="vi">hệ thống thông khí</td><td class="def">System of pipes that prevents pressure buildup and odours in drain pipes.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">19</span><span class="en">valve</span></td><td class="vi">van</td><td class="def">Device that controls the flow of water or gas through a pipe.</td></tr>
+          <tr data-sec="s1"><td><span class="row-num" style="background:var(--blue)">20</span><span class="en">channel</span></td><td class="vi">kênh dẫn nước</td><td class="def">Open conduit used to direct water flow, used in ancient water systems.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 2: ELECTRICAL -->
+  <div class="section" id="sec-s2">
+    <div class="sec-head" style="background:var(--orange);color:#fff;" onclick="toggleSection('s2',this)">
+      <span style="font-size:18px;">⚡</span>
+      <h2>Electrical Systems / Hệ thống điện</h2>
+      <span class="count">16</span>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="tbl-wrap" id="body-s2">
+      <table class="tbl">
+        <thead><tr><th>English Term</th><th>Tiếng Việt</th><th>Definition / Explanation</th></tr></thead>
+        <tbody id="rows-s2">
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">1</span><span class="en">electrical system</span></td><td class="vi">hệ thống điện</td><td class="def">Complete system including service, lighting outlets and hard-wired appliances supplying electricity to a building.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">2</span><span class="en">electrical service</span></td><td class="vi">nguồn cấp điện</td><td class="def">Electrical supply entering a building from the street grid, usually 100–200 amps.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">3</span><span class="en">lighting outlet</span></td><td class="vi">điểm cấp điện chiếu sáng</td><td class="def">Connection point in the electrical system for lighting fixtures.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">4</span><span class="en">hard-wired appliance</span></td><td class="vi">thiết bị đấu nối cố định</td><td class="def">Appliance permanently connected to the building's electrical system.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">5</span><span class="en">amp (A)</span></td><td class="vi">ampe</td><td class="def">Unit measuring the strength of electrical current flowing through a circuit.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">6</span><span class="en">meter box</span></td><td class="vi">hộp công tơ điện</td><td class="def">Enclosure that measures electricity consumption; situated outside the building.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">7</span><span class="en">electric panel board</span></td><td class="vi">bảng điện chính / tủ điện</td><td class="def">Board containing switches and circuit breakers that control electricity in each room.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">8</span><span class="en">switch</span></td><td class="vi">công tắc</td><td class="def">Device for turning individual electrical circuits on or off.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">9</span><span class="en">circuit</span></td><td class="vi">mạch điện</td><td class="def">Closed loop of electrical conductors that supplies power to a specific area of the building.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">10</span><span class="en">circuit breaker</span></td><td class="vi">cầu dao tự động (CB)</td><td class="def">Safety device that automatically stops the flow of current if a circuit is overloaded.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">11</span><span class="en">GFCI</span></td><td class="vi">thiết bị ngắt mạch chống rò điện</td><td class="def">Ground Fault Circuit Interrupter; protects against electric shock from ground faults.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">12</span><span class="en">smoke alarm</span></td><td class="vi">thiết bị báo cháy</td><td class="def">Safety device that detects smoke and alerts building occupants to a fire risk.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">13</span><span class="en">electrician</span></td><td class="vi">thợ điện</td><td class="def">Qualified tradesperson who installs, maintains and repairs electrical systems.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">14</span><span class="en">wiring</span></td><td class="vi">hệ thống dây dẫn điện</td><td class="def">Network of electrical cables and conductors installed inside a building.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">15</span><span class="en">advanced wiring system</span></td><td class="vi">hệ thống dây điện tiên tiến</td><td class="def">Modern wiring that includes data lines and computer cables for home working.</td></tr>
+          <tr data-sec="s2"><td><span class="row-num" style="background:var(--orange)">16</span><span class="en">electrical line</span></td><td class="vi">đường dây điện</td><td class="def">Cable that carries electricity from the street grid to the building's meter box.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 3: HEATING -->
+  <div class="section" id="sec-s3">
+    <div class="sec-head" style="background:var(--red);color:#fff;" onclick="toggleSection('s3',this)">
+      <span style="font-size:18px;">🔥</span>
+      <h2>Heating Systems / Hệ thống sưởi</h2>
+      <span class="count">14</span>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="tbl-wrap" id="body-s3">
+      <table class="tbl">
+        <thead><tr><th>English Term</th><th>Tiếng Việt</th><th>Definition / Explanation</th></tr></thead>
+        <tbody id="rows-s3">
+          <tr data-sec="s3"><td><span class="row-num" style="background:var(--red)">1</span><span class="en">climate-control system</span></td><td class="vi">hệ thống điều hòa khí hậu</td><td class="def">System that heats, cools and regulates indoor temperature using three components: source, distribution and control.</td></tr>
+          <tr data-sec="s3"><td><span class="row-num" style="background:var(--red)">2</span><span class="en">thermostat</span></td><td class="vi">bộ điều nhiệt</td><td class="def">Device that automatically senses and regulates temperature in a heating or cooling system.</td></tr>
+          <tr data-sec="s3"><td><span class="row-num" style="background:var(--red)">3</span><span class="en">central heating system</span></td><td class="vi">hệ thống sưởi trung tâm</td><td class="def">Single system using a furnace or boiler to heat an entire building via radiators and hot water pipes.</td></tr>
+          <tr data-sec="s3"><td><span class="row-num" style="background:var(--red)">4</span><span class="en">furnace</span></td><td class="vi">lò sưởi</td><td class="def">Device that burns fuel (gas, oil or electricity) to produce heat in a central heating system.</td></tr>
+          <tr data-sec="s3"><td><span class="row-num" style="background:var(--red)">5</span><span class="en">boiler</span></td><td class="vi">nồi hơi</td><td class="def">Device that heats water for circulation through radiators or underfloor pipes in a building.</td></tr>
+          <tr data-sec="s3"><td><span class="row-num" style="background:var(--red)">6</span><span class="en">radiator</span></td><td class="vi">bộ tản nhiệt</td><td class="def">Unit that receives hot water from the boiler and releases heat into a room by radiation and convection.</td></tr>
+          <tr data-sec="s3"><td><span class="row-num" style="background:var(--red)">7</span><span class="en">electric heat pump</span></td><td class="vi">máy bơm nhiệt điện</td><td class="def">Device that moves heat between indoor and outdoor environments; can also function as an air conditioner.</td></tr>
+          <tr data-sec="s3"><td><span class="row-num" style="background:var(--red)">8</span><span class="en">radiant skirting board heater</span></td><td class="vi">thiết bị sưởi chân tường bức xạ</td><td class="def">Long metal heating unit with electrical elements installed along the base of walls.</td></tr>
+          <tr data-sec="s3"><td><span class="row-num" style="background:var(--red)">9</span><span class="en">radiant ceiling/floor system</span></td><td class="vi">hệ thống sưởi bức xạ trần/sàn</td><td class="def">Heating system embedded in floors, ceilings or walls that warms objects by radiation.</td></tr>
+          <tr data-sec="s3"><td><span class="row-num" style="background:var(--red)">10</span><span class="en">hydronic heating</span></td><td class="vi">hệ thống sưởi bằng nước nóng tuần hoàn</td><td class="def">System using a boiler to circulate hot water through tubes under the floor or in wall units.</td></tr>
+          <tr data-sec="s3"><td><span class="row-num" style="background:var(--red)">11</span><span class="en">portable space heater</span></td><td class="vi">máy sưởi di động</td><td class="def">Freestanding or wall-mounted heater for individual rooms; works with electricity, gas or kerosene.</td></tr>
+          <tr data-sec="s3"><td><span class="row-num" style="background:var(--red)">12</span><span class="en">fuel</span></td><td class="vi">nhiên liệu</td><td class="def">Substance burned to produce energy in a heating system, e.g. gas, oil or electricity.</td></tr>
+          <tr data-sec="s3"><td><span class="row-num" style="background:var(--red)">13</span><span class="en">kerosene</span></td><td class="vi">dầu hỏa</td><td class="def">Liquid fuel used in some portable space heaters and cooking appliances.</td></tr>
+          <tr data-sec="s3"><td><span class="row-num" style="background:var(--red)">14</span><span class="en">driveway</span></td><td class="vi">lối xe vào nhà</td><td class="def">Paved area leading to a building; sometimes heated by hydronic systems to prevent ice accumulation.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 4: SOLAR -->
+  <div class="section" id="sec-s4">
+    <div class="sec-head" style="background:var(--green);color:#fff;" onclick="toggleSection('s4',this)">
+      <span style="font-size:18px;">☀️</span>
+      <h2>Solar Energy Systems / Hệ thống năng lượng mặt trời</h2>
+      <span class="count">12</span>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="tbl-wrap" id="body-s4">
+      <table class="tbl">
+        <thead><tr><th>English Term</th><th>Tiếng Việt</th><th>Definition / Explanation</th></tr></thead>
+        <tbody id="rows-s4">
+          <tr data-sec="s4"><td><span class="row-num" style="background:var(--green)">1</span><span class="en">solar energy</span></td><td class="vi">năng lượng mặt trời</td><td class="def">Electricity or heat produced from sunlight captured by solar panels.</td></tr>
+          <tr data-sec="s4"><td><span class="row-num" style="background:var(--green)">2</span><span class="en">solar panel</span></td><td class="vi">tấm pin mặt trời</td><td class="def">Device installed on roofs or walls to capture sunlight and generate electricity or heat water.</td></tr>
+          <tr data-sec="s4"><td><span class="row-num" style="background:var(--green)">3</span><span class="en">solar photovoltaic (PV) system</span></td><td class="vi">hệ thống quang điện mặt trời</td><td class="def">Converts sunlight into electricity using cells containing semiconductor materials.</td></tr>
+          <tr data-sec="s4"><td><span class="row-num" style="background:var(--green)">4</span><span class="en">solar thermal system</span></td><td class="vi">hệ thống nhiệt mặt trời</td><td class="def">Uses sunlight to heat water for domestic use; panels face the sun and contain flowing water.</td></tr>
+          <tr data-sec="s4"><td><span class="row-num" style="background:var(--green)">5</span><span class="en">semiconductor</span></td><td class="vi">chất bán dẫn</td><td class="def">Material in PV cells whose electrons react with sunlight to produce an electric current.</td></tr>
+          <tr data-sec="s4"><td><span class="row-num" style="background:var(--green)">6</span><span class="en">thermal collector</span></td><td class="vi">bộ thu nhiệt</td><td class="def">Component inside solar thermal panels that absorbs solar heat to warm circulating water.</td></tr>
+          <tr data-sec="s4"><td><span class="row-num" style="background:var(--green)">7</span><span class="en">hot water cylinder</span></td><td class="vi">bình chứa nước nóng</td><td class="def">Insulated tank that stores hot water heated by solar thermal collectors.</td></tr>
+          <tr data-sec="s4"><td><span class="row-num" style="background:var(--green)">8</span><span class="en">natural convection</span></td><td class="vi">đối lưu tự nhiên</td><td class="def">Movement of water through the solar system driven by temperature differences, without a pump.</td></tr>
+          <tr data-sec="s4"><td><span class="row-num" style="background:var(--green)">9</span><span class="en">storage tank</span></td><td class="vi">bồn chứa</td><td class="def">Vessel mounted above or below solar collectors on the roof to store heated water.</td></tr>
+          <tr data-sec="s4"><td><span class="row-num" style="background:var(--green)">10</span><span class="en">conventional boiler</span></td><td class="vi">nồi hơi truyền thống</td><td class="def">Backup boiler used to heat water further or provide hot water when solar energy is insufficient.</td></tr>
+          <tr data-sec="s4"><td><span class="row-num" style="background:var(--green)">11</span><span class="en">renewable energy</span></td><td class="vi">năng lượng tái tạo</td><td class="def">Energy from naturally replenished sources such as sunlight, wind or water.</td></tr>
+          <tr data-sec="s4"><td><span class="row-num" style="background:var(--green)">12</span><span class="en">environmental pollution</span></td><td class="vi">ô nhiễm môi trường</td><td class="def">Contamination of air, water or land by harmful substances; solar energy creates less of this.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 5: VENTILATION -->
+  <div class="section" id="sec-s5">
+    <div class="sec-head" style="background:var(--teal);color:#fff;" onclick="toggleSection('s5',this)">
+      <span style="font-size:18px;">💨</span>
+      <h2>Ventilation & Air Conditioning / Thông gió & Điều hòa</h2>
+      <span class="count">24</span>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="tbl-wrap" id="body-s5">
+      <table class="tbl">
+        <thead><tr><th>English Term</th><th>Tiếng Việt</th><th>Definition / Explanation</th></tr></thead>
+        <tbody id="rows-s5">
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">1</span><span class="en">ventilation</span></td><td class="vi">thông gió</td><td class="def">Exchange of indoor air with outdoor air to reduce moisture, odours and pollutants.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">2</span><span class="en">indoor air</span></td><td class="vi">không khí trong nhà</td><td class="def">Air contained within a building, which may accumulate pollutants without ventilation.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">3</span><span class="en">outdoor air</span></td><td class="vi">không khí ngoài trời</td><td class="def">Fresh air from outside a building supplied to replace stale indoor air.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">4</span><span class="en">moisture</span></td><td class="vi">độ ẩm / hơi ẩm</td><td class="def">Water vapour present in indoor air; excess moisture can cause physical damage to a building.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">5</span><span class="en">odour</span></td><td class="vi">mùi hôi</td><td class="def">Unpleasant smell in indoor air; removed by ventilation systems.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">6</span><span class="en">pollutant</span></td><td class="vi">chất ô nhiễm</td><td class="def">Harmful substance in indoor air such as VOCs, radon, or combustion products.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">7</span><span class="en">VOC</span></td><td class="vi">hợp chất hữu cơ dễ bay hơi</td><td class="def">Volatile Organic Compound; harmful gas released from building materials and furniture.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">8</span><span class="en">radon</span></td><td class="vi">khí radon</td><td class="def">Naturally occurring radioactive gas that can accumulate dangerously in poorly ventilated homes.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">9</span><span class="en">humidity</span></td><td class="vi">độ ẩm không khí</td><td class="def">Amount of water vapour in indoor air; high levels must be controlled to prevent building damage.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">10</span><span class="en">natural ventilation</span></td><td class="vi">thông gió tự nhiên</td><td class="def">Uncontrolled air movement through cracks, holes and vents such as doors and windows.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">11</span><span class="en">infiltration</span></td><td class="vi">sự thẩm thấu không khí</td><td class="def">Uncontrolled movement of air into a building through gaps in the building envelope.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">12</span><span class="en">spot ventilation</span></td><td class="vi">thông gió cục bộ</td><td class="def">Localised fans in rooms where contaminants are generated, e.g. kitchen extractor fans and bathroom fans.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">13</span><span class="en">whole-house ventilation</span></td><td class="vi">thông gió toàn bộ ngôi nhà</td><td class="def">System using fans and ducts to exhaust stale air and supply fresh air throughout the building.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">14</span><span class="en">duct</span></td><td class="vi">ống dẫn gió</td><td class="def">Channel used to distribute or exhaust air in a whole-house ventilation system.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">15</span><span class="en">stale air</span></td><td class="vi">không khí tù đọng</td><td class="def">Used, polluted indoor air that needs to be exhausted and replaced with fresh air.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">16</span><span class="en">fresh air</span></td><td class="vi">không khí tươi</td><td class="def">Clean outdoor air supplied to a building to replace stale indoor air.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">17</span><span class="en">exhaust ventilation</span></td><td class="vi">thông gió hút</td><td class="def">Ventilation system that forces stale air out of the building.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">18</span><span class="en">supply ventilation</span></td><td class="vi">thông gió cấp</td><td class="def">Ventilation system that forces fresh outdoor air into the building.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">19</span><span class="en">balanced ventilation</span></td><td class="vi">thông gió cân bằng</td><td class="def">Ventilation where the volume of air supplied and exhausted are equal.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">20</span><span class="en">heat exchanger</span></td><td class="vi">bộ trao đổi nhiệt</td><td class="def">Device that recovers heat from exhaust air using hollow tubes and fins to warm incoming fresh air.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">21</span><span class="en">trickle ventilator</span></td><td class="vi">cửa thông gió nhỏ</td><td class="def">Small adjustable vent fitted to windows or walls to allow controlled air flow.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">22</span><span class="en">cross ventilation</span></td><td class="vi">thông gió chéo</td><td class="def">Ventilation achieved by placing openings on opposite sides of a room to create air flow.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">23</span><span class="en">extractor fan</span></td><td class="vi">quạt hút</td><td class="def">Fan that removes contaminated air directly from a kitchen or bathroom.</td></tr>
+          <tr data-sec="s5"><td><span class="row-num" style="background:var(--teal)">24</span><span class="en">moisture control switch</span></td><td class="vi">công tắc kiểm soát độ ẩm</td><td class="def">Sensor that automatically activates an extractor fan when indoor humidity rises above a set level.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 6: PASSIVE SOLAR -->
+  <div class="section" id="sec-s6">
+    <div class="sec-head" style="background:var(--gray);color:#fff;" onclick="toggleSection('s6',this)">
+      <span style="font-size:18px;">🌿</span>
+      <h2>Passive Solar Building / Công trình năng lượng mặt trời thụ động</h2>
+      <span class="count">10</span>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="tbl-wrap" id="body-s6">
+      <table class="tbl">
+        <thead><tr><th>English Term</th><th>Tiếng Việt</th><th>Definition / Explanation</th></tr></thead>
+        <tbody id="rows-s6">
+          <tr data-sec="s6"><td><span class="row-num" style="background:var(--gray)">1</span><span class="en">passive solar building design</span></td><td class="vi">thiết kế công trình NLMT thụ động</td><td class="def">Design making windows, walls and floors collect, store and distribute solar heat without mechanical systems.</td></tr>
+          <tr data-sec="s6"><td><span class="row-num" style="background:var(--gray)">2</span><span class="en">glazing</span></td><td class="vi">kính lắp cửa</td><td class="def">Glass used in windows and doors to allow light and solar heat to enter a building.</td></tr>
+          <tr data-sec="s6"><td><span class="row-num" style="background:var(--gray)">3</span><span class="en">thermal insulation</span></td><td class="vi">cách nhiệt</td><td class="def">Material that reduces heat transfer through walls, roofs and floors of a building.</td></tr>
+          <tr data-sec="s6"><td><span class="row-num" style="background:var(--gray)">4</span><span class="en">thermal mass</span></td><td class="vi">khối nhiệt</td><td class="def">Dense material (concrete, stone) that absorbs and stores heat during the day, releasing it at night.</td></tr>
+          <tr data-sec="s6"><td><span class="row-num" style="background:var(--gray)">5</span><span class="en">shading</span></td><td class="vi">che nắng</td><td class="def">Overhangs, blinds or other devices that prevent excessive solar heat gain in summer.</td></tr>
+          <tr data-sec="s6"><td><span class="row-num" style="background:var(--gray)">6</span><span class="en">energy conservation</span></td><td class="vi">tiết kiệm năng lượng</td><td class="def">Reducing the amount of energy used in buildings through design and behaviour changes.</td></tr>
+          <tr data-sec="s6"><td><span class="row-num" style="background:var(--gray)">7</span><span class="en">renewable resource</span></td><td class="vi">tài nguyên tái tạo</td><td class="def">Resource naturally replenished by the environment, such as sunlight, wind or water.</td></tr>
+          <tr data-sec="s6"><td><span class="row-num" style="background:var(--gray)">8</span><span class="en">emissions</span></td><td class="vi">khí thải</td><td class="def">Gases released into the atmosphere from burning fossil fuels; reduced by energy conservation.</td></tr>
+          <tr data-sec="s6"><td><span class="row-num" style="background:var(--gray)">9</span><span class="en">pledge</span></td><td class="vi">cam kết</td><td class="def">Formal promise to achieve an energy or environmental target, e.g. EU 2006 energy pledge.</td></tr>
+          <tr data-sec="s6"><td><span class="row-num" style="background:var(--gray)">10</span><span class="en">programme</span></td><td class="vi">chương trình</td><td class="def">Organised plan to promote energy efficiency, e.g. the EU SAVE Programme.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:20px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);margin-top:8px;">
+    Unit 8 House Systems · Flash for Construction · Bilingual Glossary · HCMUTE
+  </div>
+</div>
+
+<script>
+let currentSection='all';
+
+function toggleSection(id,headEl){
+  const body=document.getElementById('body-'+id);
+  const isCollapsed=headEl.classList.contains('collapsed');
+  if(isCollapsed){body.style.display='block';headEl.classList.remove('collapsed');}
+  else{body.style.display='none';headEl.classList.add('collapsed');}
+}
+
+function filterSection(sec,btn){
+  currentSection=sec;
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const sections=['s1','s2','s3','s4','s5','s6'];
+  sections.forEach(s=>{
+    const el=document.getElementById('sec-'+s);
+    if(el) el.style.display=(sec==='all'||sec===s)?'block':'none';
+  });
+  filterAll();
+}
+
+function filterAll(){
+  const q=document.getElementById('searchInput').value.toLowerCase().trim();
+  let total=0,showing=0;
+  document.querySelectorAll('tr[data-sec]').forEach(row=>{
+    const sec=row.dataset.sec;
+    const secVisible=currentSection==='all'||currentSection===sec;
+    const text=row.textContent.toLowerCase();
+    const match=!q||text.includes(q);
+    row.classList.toggle('hidden-row',!(secVisible&&match));
+    if(secVisible){total++;if(match)showing++;}
+    // highlight
+    if(q&&match){
+      row.querySelectorAll('.en,.vi,.def').forEach(el=>{
+        el.innerHTML=el.textContent.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'),'<mark>$1</mark>');
+      });
+    } else {
+      row.querySelectorAll('.en,.vi,.def').forEach(el=>{el.innerHTML=el.textContent;});
+    }
+  });
+  document.getElementById('totalCount').textContent=total;
+  document.getElementById('showCount').textContent=showing;
+  document.getElementById('noResults').classList.toggle('show',showing===0&&q!=='');
+}
+
+// Init count
+window.onload=()=>{
+  const total=document.querySelectorAll('tr[data-sec]').length;
+  document.getElementById('totalCount').textContent=total;
+  document.getElementById('showCount').textContent=total;
+};
+</script>
+</body>
+</html>
